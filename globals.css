@@ -542,6 +542,10 @@ body {
     padding: 12px;
     font-size: 15px;
     border-radius: 12px;
+    left: 50% !important;
+    top: 60% !important;
+    transform: translate(-50%, -50%);
+    z-index: 10;
   }
   .balloon-question {
     font-size: 15px;
@@ -556,6 +560,10 @@ body {
     width: 120px;
     height: 90px;
     border-radius: 10px;
+    z-index: 1;
+  }
+  .background-images {
+    z-index: 1;
   }
   .celebration-title {
     font-size: 32px;
