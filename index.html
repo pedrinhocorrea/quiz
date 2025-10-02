@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎈 Jogo dos Balões Fujões</title>
+    <link rel="stylesheet" href="globals.css">
+</head>
+<body>
+    <div class="game-container" id="gameContainer">
+        <!-- Página do Jogo -->
+        <div id="gamePage">
+            <!-- Imagens de fundo -->
+            <div class="background-images">
+                <div class="bg-image" style="left: 15%; top: 15%; animation-delay: 0s;">
+                    <img src="imagens/bg1.jpg" alt="Background 1">
+                    <div class="bg-decoration">💖</div>
+                </div>
+                <div class="bg-image" style="left: 65%; top: 15%; animation-delay: 0.8s;">
+                    <img src="imagens/bg2.jpg" alt="Background 2">
+                    <div class="bg-decoration">✨</div>
+                </div>
+                <div class="bg-image" style="left: 15%; top: 65%; animation-delay: 1.6s;">
+                    <img src="imagens/bg3.jpg" alt="Background 3">
+                    <div class="bg-decoration">🌟</div>
+                </div>
+                <div class="bg-image" style="left: 65%; top: 65%; animation-delay: 2.4s;">
+                    <img src="imagens/bg4.jpg" alt="Background 4">
+                    <div class="bg-decoration">💕</div>
+                </div>
+            </div>
+
+            <!-- Elementos flutuantes -->
+            <div class="floating-elements" id="floatingElements"></div>
+
+            <!-- Header -->
+            <div class="game-header">
+                <h1 class="game-title">Pegue o Balão Fujão!</h1>
+                <p class="game-subtitle" id="gameSubtitle">Primeiro desafio - Escolha a resposta certa!</p>
+            </div>
+
+            <!-- Balão -->
+            <div class="balloon" id="balloon">
+                <div class="balloon-string"></div>
+                <div class="balloon-decoration heart">💖</div>
+                <div class="balloon-decoration sparkle">✨</div>
+                <div class="balloon-decoration angry hidden" id="angryDecoration">😤💨</div>
+                
+                <div class="balloon-question" id="balloonQuestion">Qual é a melhor resposta?</div>
+                <div class="balloon-options" id="balloonOptions">
+                    <button class="balloon-option" onclick="handleAnswer(false)">Esta resposta está errada! 😠</button>
+                    <button class="balloon-option" onclick="handleAnswer(true)">Esta é a resposta certa! ✨</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Página de Celebração -->
+        <div id="celebrationPage" class="celebration-page hidden">
+            <div class="celebration-bg">
+                <!-- Imagens de fundo celebração -->
+                <div class="celebration-image" style="left: 15%; top: 15%; transform: rotate(8deg); animation-delay: 0s;">
+                    <img src="https://images.unsplash.com/photo-1666265972790-bc655441ab58?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrYXdhaWklMjBwaW5rJTIwYWVzdGhldGljfGVufDF8fHx8MTc1OTQyNjYyM3cw&ixlib=rb-4.1.0&q=80&w=1080" alt="Celebration 1">
+                    <div class="bg-decoration">💖</div>
+                </div>
+                <div class="celebration-image" style="left: 65%; top: 15%; transform: rotate(-8deg); animation-delay: 0.3s;">
+                    <img src="https://images.unsplash.com/photo-1687988809201-ea68da0233ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3R0b24lMjBjYW5keSUyMHBpbmt8ZW58MXx8fHwxNzU5NDI2NjI1fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Celebration 2">
+                    <div class="bg-decoration">✨</div>
+                </div>
+                <div class="celebration-image" style="left: 15%; top: 65%; transform: rotate(-10deg); animation-delay: 0.6s;">
+                    <img src="https://images.unsplash.com/photo-1652501010397-7b19f1d9edad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5rJTIwYm93JTIwcmliYm9uJTIwY3V0ZXxlbnwxfHx8fDE3NTk0MjY2MzB8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Celebration 3">
+                    <div class="bg-decoration">🌟</div>
+                </div>
+                <div class="celebration-image" style="left: 65%; top: 65%; transform: rotate(10deg); animation-delay: 0.9s;">
+                    <img src="https://images.unsplash.com/photo-1598545849948-0b8def1798b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5rJTIwYnV0dGVyZmx5JTIwZHJlYW18ZW58MXx8fHwxNzU5NDI2NjI1fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Celebration 4">
+                    <div class="bg-decoration">💕</div>
+                </div>
+
+                <!-- Confetes -->
+                <div id="confettiContainer"></div>
+            </div>
+
+            <div class="celebration-content">
+                <div class="celebration-card">
+                    <div class="celebration-icons">
+                        <span>✨</span>
+                    </div>
+                    
+                    <h1 class="celebration-title">PARABÉNS! 🌟</h1>
+                    
+                    <p class="celebration-text">
+                        ✨ Você conseguiu! Agora os balões não podem mais fugir de você! 🎈💕
+                    </p>
+
+                    <div class="celebration-emojis">
+                        <span class="celebration-emoji" style="animation-delay: 0s;">✨</span>
+                        <span class="celebration-emoji" style="animation-delay: 0.3s;">💖</span>
+                    </div>
+                    
+                    <div class="celebration-small-icons">
+                        <span>🌟</span>
+                    </div>
+
+                    <button class="restart-button" onclick="restartGame()">
+                        <span>🎮</span>
+                        Jogar Novamente
+                        <span>✨</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado do jogo
+        let currentStage = 0;
+        let currentPositionIndex = 0;
+        let isMoving = false;
+
+        // Perguntas
+        const questions = [
+            {
+                question: "Qual é a melhor resposta?",
+                options: [
+                    { text: "Esta resposta está errada! 😠", correct: false },
+                    { text: "Esta é a resposta certa! ✨", correct: true }
+                ]
+            },
+            {
+                question: "Agora escolha sabiamente!",
+                options: [
+                    { text: "Você consegue me pegar! 🎯", correct: true },
+                    { text: "Nunca vai me alcançar! 😈", correct: false }
+                ]
+            }
+        ];
+
+        // Posições fixas do balão
+        const fixedPositions = [
+            { x: 25, y: 25 }, // A - Superior esquerdo
+            { x: 75, y: 25 }, // B - Superior direito
+            { x: 50, y: 75 }  // C - Centro inferior
+        ];
+
+        // Elementos
+        const balloon = document.getElementById('balloon');
+        const gameSubtitle = document.getElementById('gameSubtitle');
+        const balloonQuestion = document.getElementById('balloonQuestion');
+        const balloonOptions = document.getElementById('balloonOptions');
+        const angryDecoration = document.getElementById('angryDecoration');
+        const gamePage = document.getElementById('gamePage');
+        const celebrationPage = document.getElementById('celebrationPage');
+
+        // Inicialização
+        function init() {
+            createFloatingElements();
+            createConfetti();
+            updateBalloonPosition(fixedPositions[0]);
+            updateGameContent();
+        }
+
+        // Criar elementos flutuantes
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const elements = ['🌟', '⭐', '💖', '✨', '💕', '🌟'];
+            
+            for (let i = 0; i < 8; i++) {
+                const element = document.createElement('div');
+                
+                if (i % 2 === 0) {
+                    element.className = 'cloud';
+                } else {
+                    element.className = 'star';
+                    element.textContent = elements[i % elements.length];
+                }
+                
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = (Math.random() * 80 + 10) + '%';
+                element.style.animationDelay = Math.random() * 2 + 's';
+                element.style.animationDuration = (4 + Math.random() * 3) + 's';
+                
+                container.appendChild(element);
+            }
+        }
+
+        // Criar confetes
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const confettiEmojis = ['✨', '💖', '🌟', '💕', '⭐', '💖', '🌟', '💫', '🎈', '💝'];
+            
+            for (let i = 0; i < 40; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 4 + 's';
+                confetti.style.animationDuration = (3 + Math.random() * 2) + 's';
+                
+                container.appendChild(confetti);
+            }
+        }
+
+        // Atualizar posição do balão
+        function updateBalloonPosition(position) {
+            balloon.style.left = position.x + '%';
+            balloon.style.top = position.y + '%';
+        }
+
+        // Atualizar conteúdo do jogo
+        function updateGameContent() {
+            const question = questions[currentStage];
+            balloonQuestion.textContent = question.question;
+            gameSubtitle.textContent = currentStage === 0 ? 
+                "Primeiro desafio - Escolha a resposta certa!" : 
+                "Último desafio - Escolha a resposta certa!";
+            
+            balloonOptions.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'balloon-option';
+                button.textContent = option.text;
+                button.onclick = () => handleAnswer(option.correct);
+                balloonOptions.appendChild(button);
+            });
+        }
+
+        // Mover balão suavemente
+        function moveBalloonTo(targetPosition) {
+            if (isMoving) return;
+            
+            isMoving = true;
+            // Removido efeito de tremor, apenas deslize
+            angryDecoration.classList.remove('hidden');
+            
+            const startPosition = {
+                x: parseFloat(balloon.style.left || '50'),
+                y: parseFloat(balloon.style.top || '50')
+            };
+            
+            const duration = 1000; // 1 segundo
+            const startTime = Date.now();
+            
+            function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                
+                const currentPos = {
+                    x: startPosition.x + (targetPosition.x - startPosition.x) * easeProgress,
+                    y: startPosition.y + (targetPosition.y - startPosition.y) * easeProgress
+                };
+                
+                updateBalloonPosition(currentPos);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    isMoving = false;
+                    // Removido efeito de tremor, apenas deslize
+                    angryDecoration.classList.add('hidden');
+                }
+            }
+            
+            animate();
+        }
+
+        // Lidar com resposta
+        function handleAnswer(isCorrect) {
+            if (isMoving) return;
+            
+            if (isCorrect) {
+                if (currentStage < questions.length - 1) {
+                    currentStage++;
+                    currentPositionIndex = 0;
+                    updateGameContent();
+                    updateBalloonPosition(fixedPositions[0]);
+                } else {
+                    showCelebration();
+                }
+            } else {
+                // Mover para próxima posição
+                currentPositionIndex = (currentPositionIndex + 1) % fixedPositions.length;
+                moveBalloonTo(fixedPositions[currentPositionIndex]);
+            }
+        }
+
+        // Mostrar celebração
+        function showCelebration() {
+            gamePage.classList.add('hidden');
+            celebrationPage.classList.remove('hidden');
+        }
+
+        // Reiniciar jogo
+        function restartGame() {
+            currentStage = 0;
+            currentPositionIndex = 0;
+            isMoving = false;
+            
+            celebrationPage.classList.add('hidden');
+            gamePage.classList.remove('hidden');
+            
+            updateBalloonPosition(fixedPositions[0]);
+            updateGameContent();
+            balloon.classList.remove('moving');
+            angryDecoration.classList.add('hidden');
+        }
+
+        // Inicializar quando a página carregar
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
