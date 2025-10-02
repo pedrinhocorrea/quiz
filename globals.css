@@ -563,7 +563,17 @@ body {
     z-index: 1;
   }
   .background-images {
-    z-index: 1;
+    z-index: 0;
+  }
+  .bg-image,
+  .celebration-image {
+    z-index: 0;
+  }
+  .balloon,
+  .game-header {
+    z-index: 2;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(2px);
   }
   .celebration-title {
     font-size: 32px;
