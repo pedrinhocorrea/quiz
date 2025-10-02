@@ -522,6 +522,53 @@ body {
         height: 150px; 
     }
 }
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+  .game-header {
+    padding: 10px 8px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+  .game-title {
+    font-size: 20px;
+  }
+  .game-subtitle {
+    font-size: 14px;
+  }
+  .balloon {
+    max-width: 95vw;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+  .balloon-question {
+    font-size: 15px;
+  }
+  .balloon-option {
+    font-size: 15px;
+    padding: 8px;
+    border-radius: 10px;
+  }
+  .background-images .bg-image,
+  .celebration-image {
+    width: 120px;
+    height: 90px;
+    border-radius: 10px;
+  }
+  .celebration-title {
+    font-size: 32px;
+  }
+  .celebration-text {
+    font-size: 16px;
+  }
+  .restart-button {
+    font-size: 15px;
+    padding: 10px 16px;
+    border-radius: 12px;
+  }
+}
 .hidden {
     display: none;
 }
